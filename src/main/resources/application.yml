@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  profiles:
+    include: db
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
