@@ -10,5 +10,4 @@ public class TravelPlanRepoApplication {
     public static void main(String[] args) {
         SpringApplication.run(TravelPlanRepoApplication.class, args);
     }
-
 }
