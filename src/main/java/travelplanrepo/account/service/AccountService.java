@@ -17,7 +17,7 @@ public class AccountService {
     public Account signUp(Account account) {
 
         String encodePassword = bCryptPasswordEncoder.encode(account.getPassword());
-        Account madeAccount = new Account(account.getEmail(), encodePassword, Role.User);
+        Account madeAccount = new Account(account.getEmail(), encodePassword, Role.USER);
         return accountRepository.save(madeAccount);
     }
 }
