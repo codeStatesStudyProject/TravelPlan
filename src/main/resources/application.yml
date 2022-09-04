@@ -9,6 +9,11 @@ server:
 spring:
   profiles:
     include: db
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 decorator:
   datasource:

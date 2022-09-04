@@ -3,6 +3,7 @@ package travelplanrepo.account.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import travelplanrepo.common.auditing.BaseTime;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Account {
+public class Account extends BaseTime {
     @Id @GeneratedValue
     @Column(name = "account_id")
     private Long id;
