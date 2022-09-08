@@ -33,7 +33,7 @@ public class FileProcessor {
         return originalFilename.substring(pos + 1);
     }
 
-    private String getFullPath(String path, String storeFileName) {
+    public String getFullPath(String path, String storeFileName) {
         return path + storeFileName;
     }
 }
