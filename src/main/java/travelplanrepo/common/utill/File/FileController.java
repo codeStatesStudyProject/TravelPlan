@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,20 +29,32 @@ public class FileController {
     private final FileProcessor fileProcessor;
 
     @GetMapping("/profileImg/{imgName}")
-    public Resource getProfileImg(@PathVariable String imgName) throws MalformedURLException {
+    public ResponseEntity<Resource> getProfileImg(@PathVariable String imgName) throws MalformedURLException {
         String fullPath = fileProcessor.getFullPath(profileImgPath, imgName);
-        return new UrlResource("file:" + fullPath);
+        UrlResource urlResource = new UrlResource("file:" + fullPath);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
+                .body(urlResource);
     }
 
     @GetMapping("/boardImg/{imgName}")
-    public Resource getBoardImg(@PathVariable String imgName) throws MalformedURLException {
+    public ResponseEntity<Resource> getBoardImg(@PathVariable String imgName) throws MalformedURLException {
         String fullPath = fileProcessor.getFullPath(boardImgPath, imgName);
-        return new UrlResource("file:" + fullPath);
+        UrlResource urlResource = new UrlResource("file:" + fullPath);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
+                .body(urlResource);
     }
 
     @GetMapping("/scheduleImg/{imgName}")
-    public Resource getScheduleImg(@PathVariable String imgName) throws MalformedURLException {
+    public ResponseEntity<Resource> getScheduleImg(@PathVariable String imgName) throws MalformedURLException {
         String fullPath = fileProcessor.getFullPath(scheduleImgPath, imgName);
-        return new UrlResource("file:" + fullPath);
+        UrlResource urlResource = new UrlResource("file:" + fullPath);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
+                .body(urlResource);
     }
 }
