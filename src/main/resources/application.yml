@@ -8,14 +8,8 @@ server:
 
 spring:
   profiles:
-    include: db
+    include: db, file
   jpa:
     hibernate:
-      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: true
