@@ -14,11 +14,11 @@ public class P6spySqlFormatConfiguration implements MessageFormattingStrategy {
     @Override
     public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
         sql = formatSql(category, sql);
-        return now + "|" + elapsed + "ms|" + category + "|connection " + connectionId + "|" + P6Util.singleLine(prepared) + sql;
+        return "|P6Spy sql|" + category + "|" + sql;
     }
 
     private String formatSql(String category,String sql) {
-        if(sql ==null || sql.trim().equals("")) return sql;
+        if(sql == null || sql.trim().equals("")) return sql;
 
         // Only format Statement, distinguish DDL And DML
         if (Category.STATEMENT.getName().equals(category)) {
@@ -28,7 +28,6 @@ public class P6spySqlFormatConfiguration implements MessageFormattingStrategy {
             }else {
                 sql = FormatStyle.BASIC.getFormatter().format(sql);
             }
-            sql = "|\nHeFormatSql(P6Spy sql,Hibernate format):"+ sql;
         }
         return sql;
     }

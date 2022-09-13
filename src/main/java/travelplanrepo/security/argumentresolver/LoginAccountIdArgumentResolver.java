@@ -1,4 +1,4 @@
-package travelplanrepo.argumentresolver;
+package travelplanrepo.security.argumentresolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.context.SecurityContextHolder;
