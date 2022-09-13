@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import travelplanrepo.account.entity.Account;
 import travelplanrepo.account.service.AccountService;
-import travelplanrepo.argumentresolver.LoginAccountId;
+import travelplanrepo.security.argumentresolver.LoginAccountId;
 
 @RestController
 @RequiredArgsConstructor

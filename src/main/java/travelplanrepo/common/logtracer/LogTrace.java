@@ -32,7 +32,7 @@ public class LogTrace {
 
     private void complete(TraceStatus status, Exception e) {
         Long stopTimeMs = System.currentTimeMillis();
-        float resultTimeS = (status.getStartTimeMsStack().pop() - stopTimeMs) / 1000F;
+        float resultTimeS = (stopTimeMs - status.getStartTimeMsStack().pop()) / 1000F;
         String traceId = status.getId();
 
         if (e == null) {
@@ -67,7 +67,9 @@ public class LogTrace {
     private void syncTraceStatus(String message) {
         TraceStatus traceStatus = traceStatusHolder.get();
         if (traceStatus == null) {
-            traceStatusHolder.set(new TraceStatus());
+            System.out.println();
+            log.info("begin LogTrace");
+            traceStatusHolder.set(new TraceStatus(message));
         } else {
             traceStatus.beNextLevel(message);
         }

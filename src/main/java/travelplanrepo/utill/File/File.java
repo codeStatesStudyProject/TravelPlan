@@ -1,4 +1,4 @@
-package travelplanrepo.common.utill.File;
+package travelplanrepo.utill.File;
 
 import lombok.AccessLevel;
 import lombok.Getter;

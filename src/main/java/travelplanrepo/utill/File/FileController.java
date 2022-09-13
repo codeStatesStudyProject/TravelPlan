@@ -1,4 +1,4 @@
-package travelplanrepo.common.utill.File;
+package travelplanrepo.utill.File;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

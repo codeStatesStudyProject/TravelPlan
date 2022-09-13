@@ -1,4 +1,4 @@
-package travelplanrepo.common.utill.File;
+package travelplanrepo.utill.File;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

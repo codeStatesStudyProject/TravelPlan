@@ -9,12 +9,13 @@ import java.util.UUID;
 public class TraceStatus {
     private String id;
     private int level;
-    private Stack<String> messageStack;
-    private Stack<Long> startTimeMsStack;
+    private Stack<String> messageStack = new Stack<>();
+    private Stack<Long> startTimeMsStack = new Stack<>();
 
-    public TraceStatus() {
+    public TraceStatus(String message) {
         this.id = createId();
         this.level = 0;
+        this.messageStack.push(message);
     }
 
     private String createId() {
