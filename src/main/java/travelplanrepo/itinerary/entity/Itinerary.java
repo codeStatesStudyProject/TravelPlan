@@ -1,6 +1,7 @@
 package travelplanrepo.itinerary.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import travelplanrepo.board.entity.Board;
 import travelplanrepo.common.auditing.BaseTime;
 import travelplanrepo.utill.File.File;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 public class Itinerary extends BaseTime {
 
     @Id @GeneratedValue

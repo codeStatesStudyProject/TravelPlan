@@ -43,7 +43,7 @@ public class SecurityConfig {
 
         http
                 .authorizeRequests()
-                .mvcMatchers("/account/test").authenticated()
+                .mvcMatchers("/board").authenticated()
                 .anyRequest().permitAll();
 
 
