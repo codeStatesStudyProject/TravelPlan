@@ -25,6 +25,10 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
+    public Account getAccount(long accountId) {
+        return findVerifiedAccount(accountId);
+    }
+
     public Account findVerifiedAccount(long accountId) {
         Optional<Account> optionalMember =
                 accountRepository.findById(accountId);
