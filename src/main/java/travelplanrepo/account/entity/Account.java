@@ -23,7 +23,7 @@ public class Account extends BaseTime {
     private String email;
     private String password;
     private String nickName;
-    private File profileImg;
+    private File img;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
