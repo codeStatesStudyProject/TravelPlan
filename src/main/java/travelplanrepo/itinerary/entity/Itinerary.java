@@ -3,6 +3,7 @@ package travelplanrepo.itinerary.entity;
 import lombok.Getter;
 import travelplanrepo.board.entity.Board;
 import travelplanrepo.common.auditing.BaseTime;
+import travelplanrepo.utill.File.File;
 
 import javax.persistence.*;
 
@@ -20,7 +21,7 @@ public class Itinerary extends BaseTime {
     private long number;
     private String content;
     private String link;
-    private String img;
+    private File img;
     private String explanation;
     private int day;
 }

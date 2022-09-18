@@ -4,7 +4,6 @@ import lombok.Getter;
 import travelplanrepo.account.entity.Account;
 import travelplanrepo.board.entity.Board;
 import travelplanrepo.common.auditing.BaseTime;
-import travelplanrepo.common.enums.Status;
 
 import javax.persistence.*;
 
@@ -20,7 +19,4 @@ public class Likes extends BaseTime {
 
     @ManyToOne
     private Account account;
-
-    @Enumerated(EnumType.STRING)
-    private Status status;
 }
