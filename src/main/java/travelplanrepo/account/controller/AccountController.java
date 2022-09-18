@@ -2,7 +2,10 @@ package travelplanrepo.account.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import travelplanrepo.account.dto.AccountRes;
 import travelplanrepo.account.dto.PostAccountDto;
 import travelplanrepo.account.entity.Account;
 import travelplanrepo.account.service.AccountService;
@@ -29,5 +32,13 @@ public class AccountController {
         accountService.signUp(account);
 
         return "success account created";
+    }
+
+    @GetMapping("/account/profile/{accountId}")
+    public ResponseEntity<AccountRes> getAccount(@PathVariable long accountId) {
+        Account account = accountService.getAccount(accountId);
+        AccountRes accountRes = new AccountRes(account);
+
+        return new ResponseEntity<>(accountRes, HttpStatus.OK);
     }
 }
