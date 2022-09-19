@@ -28,5 +28,4 @@ public class Board extends BaseTime {
     private String title;
     private String preface;
     private File thumbnail;
-
 }
