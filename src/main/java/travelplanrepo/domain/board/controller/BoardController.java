@@ -24,8 +24,8 @@ public class BoardController {
     @Value("${file.boardImg}")
     private String boardImgPath;
 
-    @Value("${file.scheduleImg}")
-    private String scheduleImgPath;
+    @Value("${file.itineraryImg}")
+    private String itineraryImgPath;
 
     private final BoardService boardService;
     private final FileService fileService;
@@ -40,7 +40,7 @@ public class BoardController {
         List<Itinerary> boardItineraryList = board.getItineraryList();
         for (int i = 0; i < itineraryList.size(); i++) {
             PostItineraryDto postItineraryDto = itineraryList.get(i);
-            File img = fileService.storeFile(postItineraryDto.getImg(), scheduleImgPath);
+            File img = fileService.storeFile(postItineraryDto.getImg(), itineraryImgPath);
 
             Itinerary itinerary = boardItineraryList.get(i);
             itinerary.setImg(img);
