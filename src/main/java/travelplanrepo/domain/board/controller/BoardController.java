@@ -33,6 +33,15 @@ public class BoardController {
     @PostMapping("/board")
     public String postBoard(@LoginAccountId Long accountId, @ModelAttribute PostBoardDto postBoardDto) throws IOException {
         Board board = postBoardDto.toBoard();
+
+        storeBoardImg(postBoardDto, board);
+
+        boardService.signBoard(accountId, board);
+
+        return "success board created";
+    }
+
+    private void storeBoardImg(PostBoardDto postBoardDto, Board board) throws IOException {
         File thumbnail = fileService.storeFile(postBoardDto.getThumbnail(), boardImgPath);
         board.setThumbnail(thumbnail);
 
@@ -45,8 +54,5 @@ public class BoardController {
             Itinerary itinerary = boardItineraryList.get(i);
             itinerary.setImg(img);
         }
-
-        boardService.signBoard(accountId, board);
-        return "success board created";
     }
 }

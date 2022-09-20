@@ -19,6 +19,7 @@ public class BoardService {
     public void signBoard(long accountId, Board board) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new NoSuchElementException("Account를 찾을 수 없습니다."));
+
         board.setAccount(account);
 
         boardRepository.save(board);

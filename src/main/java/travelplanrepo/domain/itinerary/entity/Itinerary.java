@@ -27,4 +27,9 @@ public class Itinerary extends BaseTime {
     private File img;
     private String explanation;
     private int day;
+
+    public void chaneBoard(Board board) {
+        this.board = board;
+        board.getItineraryList().add(this);
+    }
 }

@@ -18,23 +18,21 @@ public class PostBoardDto {
     private List<PostItineraryDto> itineraryList = new ArrayList<>();
 
     public Board toBoard() {
-        Board board = new Board();
-        board.setTitle(title);
-        board.setPreface(preface);
+        Board board = Board.builder()
+                .title(title)
+                .preface(preface)
+                .itineraryList(new ArrayList<>())
+                .build();
+
         addItinerary(board);
 
         return board;
     }
 
     public void addItinerary(Board board) {
-        List<Itinerary> boardItineraryList = board.getItineraryList();
-        for (int i = 0; i < itineraryList.size(); i++) {
-            PostItineraryDto postItineraryDto = itineraryList.get(i);
+        for (PostItineraryDto postItineraryDto : itineraryList) {
             Itinerary itinerary = postItineraryDto.toItinerary();
-
-            boardItineraryList.add(itinerary);
-            Itinerary boardItinerary = boardItineraryList.get(i);
-            boardItinerary.setBoard(board);
+            itinerary.chaneBoard(board);
         }
     }
 }

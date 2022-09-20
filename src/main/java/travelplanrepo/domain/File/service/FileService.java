@@ -11,7 +11,7 @@ import java.util.UUID;
 public class FileService {
 
     public File storeFile(MultipartFile multipartFile, String path) throws IOException {
-        if (multipartFile.isEmpty()) {
+        if (multipartFile == null || multipartFile.isEmpty()) {
             return null;
         }
 
