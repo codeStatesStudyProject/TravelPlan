@@ -39,4 +39,4 @@ out/
 ### Custom ###
 /src/main/resources/application-db.yml
 /src/main/resources/application-file.yml
-/src/main/java/travelplanrepo/config/local
+/src/main/java/travelplanrepo/global/config/local/
