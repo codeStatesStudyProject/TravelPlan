@@ -3,7 +3,7 @@ package travelplanrepo.domain.account.dto;
 import lombok.Data;
 import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.entity.Gender;
-import travelplanrepo.domain.File.File;
+import travelplanrepo.domain.File.domain.File;
 
 @Data
 public class AccountRes {

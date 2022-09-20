@@ -1,4 +1,4 @@
-package travelplanrepo.domain.File;
+package travelplanrepo.domain.File.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;

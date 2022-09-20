@@ -9,8 +9,8 @@ import travelplanrepo.domain.account.dto.AccountRes;
 import travelplanrepo.domain.account.dto.PostAccountDto;
 import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.service.AccountService;
-import travelplanrepo.domain.File.File;
-import travelplanrepo.domain.File.FileProcessor;
+import travelplanrepo.domain.File.domain.File;
+import travelplanrepo.domain.File.service.FileService;
 
 import java.io.IOException;
 
@@ -21,12 +21,12 @@ public class AccountController {
     @Value("${file.profileImg}")
     private String profileImgPath;
     private final AccountService accountService;
-    private final FileProcessor fileProcessor;
+    private final FileService fileService;
 
     @PostMapping("/account")
     public String signUp(@ModelAttribute PostAccountDto postAccountDto) throws IOException {
         Account account = postAccountDto.toAccount();
-        File profileImg = fileProcessor.storeFile(postAccountDto.getImg(), profileImgPath);
+        File profileImg = fileService.storeFile(postAccountDto.getImg(), profileImgPath);
         account.setImg(profileImg);
         accountService.signUp(account);
 

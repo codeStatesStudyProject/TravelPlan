@@ -15,8 +15,10 @@ public class Likes extends BaseTime {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "board_id")
     private Board board;
 
     @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 }

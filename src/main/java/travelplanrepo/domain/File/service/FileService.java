@@ -1,13 +1,14 @@
-package travelplanrepo.domain.File;
+package travelplanrepo.domain.File.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import travelplanrepo.domain.File.domain.File;
 
 import java.io.IOException;
 import java.util.UUID;
 
 @Component
-public class FileProcessor {
+public class FileService {
 
     public File storeFile(MultipartFile multipartFile, String path) throws IOException {
         if (multipartFile.isEmpty()) {

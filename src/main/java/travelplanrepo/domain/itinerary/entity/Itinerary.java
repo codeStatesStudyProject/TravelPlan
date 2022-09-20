@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import travelplanrepo.domain.board.entity.Board;
 import travelplanrepo.global.common.auditing.BaseTime;
-import travelplanrepo.domain.File.File;
+import travelplanrepo.domain.File.domain.File;
 
 import javax.persistence.*;
 
@@ -18,6 +18,7 @@ public class Itinerary extends BaseTime {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "board_id")
     private Board board;
 
     private long number;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import travelplanrepo.global.common.auditing.BaseTime;
-import travelplanrepo.domain.File.File;
+import travelplanrepo.domain.File.domain.File;
 
 import javax.persistence.*;
 
@@ -14,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Account extends BaseTime {
     @Id @GeneratedValue
+    @Column(name = "account_id")
     private Long id;
     private String email;
     private String password;

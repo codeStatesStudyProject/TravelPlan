@@ -1,4 +1,4 @@
-package travelplanrepo.domain.File;
+package travelplanrepo.domain.File.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import travelplanrepo.domain.File.service.FileService;
 
 import java.net.MalformedURLException;
 
@@ -26,11 +27,11 @@ public class FileController {
     @Value("${file.scheduleImg}")
     private String scheduleImgPath;
 
-    private final FileProcessor fileProcessor;
+    private final FileService fileService;
 
     @GetMapping("/profileImg/{imgName}")
     public ResponseEntity<Resource> getProfileImg(@PathVariable String imgName) throws MalformedURLException {
-        String fullPath = fileProcessor.getFullPath(profileImgPath, imgName);
+        String fullPath = fileService.getFullPath(profileImgPath, imgName);
         UrlResource urlResource = new UrlResource("file:" + fullPath);
 
         return ResponseEntity.ok()
@@ -40,7 +41,7 @@ public class FileController {
 
     @GetMapping("/boardImg/{imgName}")
     public ResponseEntity<Resource> getBoardImg(@PathVariable String imgName) throws MalformedURLException {
-        String fullPath = fileProcessor.getFullPath(boardImgPath, imgName);
+        String fullPath = fileService.getFullPath(boardImgPath, imgName);
         UrlResource urlResource = new UrlResource("file:" + fullPath);
 
         return ResponseEntity.ok()
@@ -50,7 +51,7 @@ public class FileController {
 
     @GetMapping("/scheduleImg/{imgName}")
     public ResponseEntity<Resource> getScheduleImg(@PathVariable String imgName) throws MalformedURLException {
-        String fullPath = fileProcessor.getFullPath(scheduleImgPath, imgName);
+        String fullPath = fileService.getFullPath(scheduleImgPath, imgName);
         UrlResource urlResource = new UrlResource("file:" + fullPath);
 
         return ResponseEntity.ok()

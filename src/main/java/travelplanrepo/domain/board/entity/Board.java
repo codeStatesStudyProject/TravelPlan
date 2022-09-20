@@ -5,7 +5,7 @@ import lombok.Setter;
 import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.global.common.auditing.BaseTime;
 import travelplanrepo.domain.itinerary.entity.Itinerary;
-import travelplanrepo.domain.File.File;
+import travelplanrepo.domain.File.domain.File;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ public class Board extends BaseTime {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
