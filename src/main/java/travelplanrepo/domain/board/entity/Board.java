@@ -24,15 +24,19 @@ public class Board extends BaseTime {
     @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
     private List<Itinerary> itineraryList;
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
+    private List<BoardTag> boardTagList;
+
     private String title;
     private String preface;
     private File thumbnail;
 
     @Builder
-    public Board(Account account, List<Itinerary> itineraryList,
+    public Board(Account account, List<Itinerary> itineraryList, List<BoardTag> boardTagList,
                  String title, String preface, File thumbnail) {
         this.account = account;
         this.itineraryList = itineraryList;
+        this.boardTagList = boardTagList;
         this.title = title;
         this.preface = preface;
         this.thumbnail = thumbnail;

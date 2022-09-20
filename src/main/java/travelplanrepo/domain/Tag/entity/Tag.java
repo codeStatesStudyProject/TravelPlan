@@ -1,6 +1,7 @@
 package travelplanrepo.domain.Tag.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import travelplanrepo.global.common.auditing.BaseTime;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Tag extends BaseTime {
 
     @Id @GeneratedValue
@@ -17,4 +19,8 @@ public class Tag extends BaseTime {
     private Long id;
 
     private String content;
+
+    public Tag(String content) {
+        this.content = content;
+    }
 }
