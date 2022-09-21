@@ -3,7 +3,6 @@ package travelplanrepo.domain.itinerary.dto;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 import travelplanrepo.domain.itinerary.entity.Itinerary;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
