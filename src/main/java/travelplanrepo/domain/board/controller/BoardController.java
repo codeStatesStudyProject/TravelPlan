@@ -14,6 +14,7 @@ import travelplanrepo.global.security.argumentresolver.LoginAccountId;
 import travelplanrepo.domain.File.domain.File;
 import travelplanrepo.domain.File.service.FileService;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,15 +25,25 @@ public class BoardController {
     @Value("${file.boardImg}")
     private String boardImgPath;
 
-    @Value("${file.scheduleImg}")
-    private String scheduleImgPath;
+    @Value("${file.itineraryImg}")
+    private String itineraryImgPath;
 
     private final BoardService boardService;
     private final FileService fileService;
 
     @PostMapping("/board")
-    public String postBoard(@LoginAccountId Long accountId, @ModelAttribute PostBoardDto postBoardDto) throws IOException {
+    public String postBoard(@LoginAccountId Long accountId,
+                            @Valid @ModelAttribute PostBoardDto postBoardDto) throws IOException {
         Board board = postBoardDto.toBoard();
+
+        storeBoardImg(postBoardDto, board);
+
+        boardService.signBoard(accountId, board);
+
+        return "success board created";
+    }
+
+    private void storeBoardImg(PostBoardDto postBoardDto, Board board) throws IOException {
         File thumbnail = fileService.storeFile(postBoardDto.getThumbnail(), boardImgPath);
         board.setThumbnail(thumbnail);
 
@@ -40,13 +51,10 @@ public class BoardController {
         List<Itinerary> boardItineraryList = board.getItineraryList();
         for (int i = 0; i < itineraryList.size(); i++) {
             PostItineraryDto postItineraryDto = itineraryList.get(i);
-            File img = fileService.storeFile(postItineraryDto.getImg(), scheduleImgPath);
+            File img = fileService.storeFile(postItineraryDto.getImg(), itineraryImgPath);
 
             Itinerary itinerary = boardItineraryList.get(i);
             itinerary.setImg(img);
         }
-
-        boardService.signBoard(accountId, board);
-        return "success board created";
     }
 }

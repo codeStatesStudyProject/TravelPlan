@@ -11,11 +11,12 @@ import java.util.UUID;
 public class FileService {
 
     public File storeFile(MultipartFile multipartFile, String path) throws IOException {
-        if (multipartFile.isEmpty()) {
+        if (multipartFile == null || multipartFile.isEmpty()) {
             return null;
         }
 
         String originalFilename = multipartFile.getOriginalFilename();
+        verifiedFilename(originalFilename);
         String storeFileName = getStoreFileName(originalFilename);
         String fullPath = getFullPath(path, storeFileName);
 
@@ -36,5 +37,16 @@ public class FileService {
 
     public String getFullPath(String path, String storeFileName) {
         return path + storeFileName;
+    }
+
+    private void verifiedFilename(String filename) {
+        if (filename == null) {
+            throw new IllegalStateException("잘못된 형식의 Filename 입니다.");
+        }
+
+        boolean matches = filename.matches("^[a-zA-Zㄱ-ㅎ가-힣-_]+\\.(jpg|JPG|png|PNG|jpeg|JPEG)$");
+        if (!matches) {
+            throw new IllegalStateException("잘못된 형식의 Filename 입니다.");
+        }
     }
 }

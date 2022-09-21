@@ -24,8 +24,8 @@ public class FileController {
     @Value("${file.boardImg}")
     private String boardImgPath;
 
-    @Value("${file.scheduleImg}")
-    private String scheduleImgPath;
+    @Value("${file.itineraryImg}")
+    private String itineraryImgPath;
 
     private final FileService fileService;
 
@@ -49,9 +49,9 @@ public class FileController {
                 .body(urlResource);
     }
 
-    @GetMapping("/scheduleImg/{imgName}")
-    public ResponseEntity<Resource> getScheduleImg(@PathVariable String imgName) throws MalformedURLException {
-        String fullPath = fileService.getFullPath(scheduleImgPath, imgName);
+    @GetMapping("/itineraryImg/{imgName}")
+    public ResponseEntity<Resource> getItineraryImg(@PathVariable String imgName) throws MalformedURLException {
+        String fullPath = fileService.getFullPath(itineraryImgPath, imgName);
         UrlResource urlResource = new UrlResource("file:" + fullPath);
 
         return ResponseEntity.ok()
