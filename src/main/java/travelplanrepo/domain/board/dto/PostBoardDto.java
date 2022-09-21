@@ -9,17 +9,24 @@ import travelplanrepo.domain.board.entity.BoardTag;
 import travelplanrepo.domain.itinerary.dto.PostItineraryDto;
 import travelplanrepo.domain.itinerary.entity.Itinerary;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class PostBoardDto {
 
+    @NotBlank
     private String title;
+
     private String preface;
+
     private MultipartFile thumbnail;
-    private List<PostItineraryDto> itineraryList = new ArrayList<>();
-    private List<TagReq> tagList = new ArrayList<>();
+
+    private List<@Valid PostItineraryDto> itineraryList = new ArrayList<>();
+
+    private List<@Valid TagReq> tagList = new ArrayList<>();
 
     public Board toBoard() {
         Board board = Board.builder()

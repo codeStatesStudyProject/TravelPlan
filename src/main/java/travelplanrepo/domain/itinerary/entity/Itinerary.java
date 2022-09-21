@@ -22,7 +22,7 @@ public class Itinerary extends BaseTime {
     private Board board;
 
     private long number;
-    private String content;
+    private String title;
     private String link;
     private File img;
     private String explanation;

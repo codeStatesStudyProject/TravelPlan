@@ -14,6 +14,7 @@ import travelplanrepo.global.security.argumentresolver.LoginAccountId;
 import travelplanrepo.domain.File.domain.File;
 import travelplanrepo.domain.File.service.FileService;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class BoardController {
     private final FileService fileService;
 
     @PostMapping("/board")
-    public String postBoard(@LoginAccountId Long accountId, @ModelAttribute PostBoardDto postBoardDto) throws IOException {
+    public String postBoard(@LoginAccountId Long accountId,
+                            @Valid @ModelAttribute PostBoardDto postBoardDto) throws IOException {
         Board board = postBoardDto.toBoard();
 
         storeBoardImg(postBoardDto, board);
