@@ -24,5 +24,4 @@ public class BoardService {
 
         boardRepository.save(board);
     }
-
 }
