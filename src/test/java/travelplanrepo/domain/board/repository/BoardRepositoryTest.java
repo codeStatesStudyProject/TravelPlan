@@ -34,10 +34,10 @@ public class BoardRepositoryTest {
         List<Board> all = boardRepository.findAll();
 
         List<Account> all1 = accountRepository.findAll();
-        try {
-            throw new Exception("Test Error");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            throw new Exception("Test Error");
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }
