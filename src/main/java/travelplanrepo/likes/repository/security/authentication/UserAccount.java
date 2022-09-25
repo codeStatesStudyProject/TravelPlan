@@ -1,4 +1,4 @@
-package travelplanrepo.security.authentication;
+package travelplanrepo.likes.repository.security.authentication;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

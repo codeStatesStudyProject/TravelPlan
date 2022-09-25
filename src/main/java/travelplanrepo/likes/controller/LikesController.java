@@ -3,7 +3,7 @@ package travelplanrepo.likes.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import travelplanrepo.likes.service.LikesService;
-import travelplanrepo.security.argumentresolver.LoginAccountId;
+import travelplanrepo.likes.repository.security.argumentresolver.LoginAccountId;
 
 @RestController
 @RequiredArgsConstructor

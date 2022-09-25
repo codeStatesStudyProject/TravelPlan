@@ -1,10 +1,10 @@
-package travelplanrepo.security.utill;
+package travelplanrepo.likes.repository.security.utill;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.stereotype.Component;
-import travelplanrepo.security.authentication.UserAccount;
-import travelplanrepo.security.properties.JwtProperties;
+import travelplanrepo.likes.repository.security.authentication.UserAccount;
+import travelplanrepo.likes.repository.security.properties.JwtProperties;
 
 import java.util.Date;
 

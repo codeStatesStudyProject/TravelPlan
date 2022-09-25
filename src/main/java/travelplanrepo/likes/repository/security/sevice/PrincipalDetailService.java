@@ -1,4 +1,4 @@
-package travelplanrepo.security.sevice;
+package travelplanrepo.likes.repository.security.sevice;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import travelplanrepo.account.entity.Account;
 import travelplanrepo.account.repository.AccountRepository;
-import travelplanrepo.security.authentication.UserAccount;
+import travelplanrepo.likes.repository.security.authentication.UserAccount;
 
 @Service
 @RequiredArgsConstructor

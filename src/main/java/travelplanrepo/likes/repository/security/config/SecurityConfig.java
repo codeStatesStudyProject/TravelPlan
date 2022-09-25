@@ -1,4 +1,4 @@
-package travelplanrepo.security.config;
+package travelplanrepo.likes.repository.security.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import travelplanrepo.account.repository.AccountRepository;
-import travelplanrepo.security.filter.JwtAuthorizationFilter;
-import travelplanrepo.security.utill.JwtProcessor;
+import travelplanrepo.likes.repository.security.utill.JwtProcessor;
+import travelplanrepo.likes.repository.security.filter.JwtAuthorizationFilter;
 
 
 @Slf4j

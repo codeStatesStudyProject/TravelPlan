@@ -1,4 +1,4 @@
-package travelplanrepo.security.argumentresolver;
+package travelplanrepo.likes.repository.security.argumentresolver;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

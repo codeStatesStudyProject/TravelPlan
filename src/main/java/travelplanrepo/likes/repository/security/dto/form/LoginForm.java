@@ -1,4 +1,4 @@
-package travelplanrepo.security.dto.form;
+package travelplanrepo.likes.repository.security.dto.form;
 
 import lombok.Data;
 

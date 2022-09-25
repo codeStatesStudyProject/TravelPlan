@@ -10,7 +10,7 @@ import travelplanrepo.board.entity.Board;
 import travelplanrepo.board.service.BoardService;
 import travelplanrepo.itinerary.dto.PostItineraryDto;
 import travelplanrepo.itinerary.entity.Itinerary;
-import travelplanrepo.security.argumentresolver.LoginAccountId;
+import travelplanrepo.likes.repository.security.argumentresolver.LoginAccountId;
 import travelplanrepo.utill.File.File;
 import travelplanrepo.utill.File.FileProcessor;
 

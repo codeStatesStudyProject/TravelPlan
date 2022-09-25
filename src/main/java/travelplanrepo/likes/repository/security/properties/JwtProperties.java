@@ -1,4 +1,4 @@
-package travelplanrepo.security.properties;
+package travelplanrepo.likes.repository.security.properties;
 
 public interface JwtProperties {
     String SECRET = "TravelPlan";

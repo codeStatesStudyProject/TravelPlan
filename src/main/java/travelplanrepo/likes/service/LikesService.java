@@ -19,10 +19,8 @@ public class LikesService {
     private final BoardRepository boardRepository;
 
     public void createLikes(Long accountId, Long boardId) {
-        Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new NoSuchElementException("Account를 찾을 수 없습니다."));
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new NoSuchElementException("Board를 찾을 수 없습니다."));
+        Account account = verifiedAccount(accountId);
+        Board board = verifiedBoard(boardId);
 
         Likes likes = new Likes();
         likes.setAccount(account);
@@ -32,20 +30,31 @@ public class LikesService {
     }
 
     public void deleteLikes(Long accountId, Long boardId) {
-        Long findLikesId = findVerifiedLikes(accountId, boardId);
-        likesRepository.deleteById(findLikesId);
+        Likes likes = verifiedLikes(accountId, boardId);
+        likesRepository.deleteById(likes.getId());
     }
 
-    private Long findVerifiedLikes(Long accountId, Long boardId) {
-        Account account = accountRepository.findById(accountId).orElseThrow(() ->
-                new NoSuchElementException("회원을 찾을 수 없습니다."));
+    private Board verifiedBoard(Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new NoSuchElementException("게시글을 찾을 수 없습니다."));
 
-        Board board = boardRepository.findById(boardId).orElseThrow(() ->
-                new NoSuchElementException("게시글을 찾을 수 없습니다."));
+        return board;
+    }
+
+    private Account verifiedAccount(Long accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new NoSuchElementException("회원을 찾을 수 없습니다."));
+
+        return account;
+    }
+
+    private Likes verifiedLikes(Long accountId, Long boardId) {
+        verifiedAccount(accountId);
+        verifiedBoard(boardId);
 
         Likes likes = likesRepository.findLikesBy(accountId, boardId).orElseThrow(() ->
                 new NoSuchElementException("좋아요를 찾을 수 없습니다."));
 
-        return likes.getId();
+        return likes;
     }
 }

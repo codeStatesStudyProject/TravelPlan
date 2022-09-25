@@ -1,12 +1,12 @@
-package travelplanrepo.security.controller;
+package travelplanrepo.likes.repository.security.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import travelplanrepo.security.dto.form.LoginForm;
-import travelplanrepo.security.properties.JwtProperties;
-import travelplanrepo.security.sevice.AuthService;
+import travelplanrepo.likes.repository.security.properties.JwtProperties;
+import travelplanrepo.likes.repository.security.dto.form.LoginForm;
+import travelplanrepo.likes.repository.security.sevice.AuthService;
 
 import javax.servlet.http.HttpServletResponse;
 

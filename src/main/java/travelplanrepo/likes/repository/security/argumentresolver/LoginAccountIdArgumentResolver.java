@@ -1,4 +1,4 @@
-package travelplanrepo.security.argumentresolver;
+package travelplanrepo.likes.repository.security.argumentresolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import travelplanrepo.security.authentication.UserAccount;
+import travelplanrepo.likes.repository.security.authentication.UserAccount;
 
 public class LoginAccountIdArgumentResolver implements HandlerMethodArgumentResolver {
 

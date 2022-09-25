@@ -1,4 +1,4 @@
-package travelplanrepo.security.filter;
+package travelplanrepo.likes.repository.security.filter;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import travelplanrepo.account.entity.Account;
 import travelplanrepo.account.repository.AccountRepository;
-import travelplanrepo.security.authentication.UserAccount;
-import travelplanrepo.security.properties.JwtProperties;
-import travelplanrepo.security.utill.JwtProcessor;
+import travelplanrepo.likes.repository.security.authentication.UserAccount;
+import travelplanrepo.likes.repository.security.properties.JwtProperties;
+import travelplanrepo.likes.repository.security.utill.JwtProcessor;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
