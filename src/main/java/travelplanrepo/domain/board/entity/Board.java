@@ -32,8 +32,9 @@ public class Board extends BaseTime {
     private File thumbnail;
 
     @Builder
-    public Board(Account account, List<Itinerary> itineraryList, List<BoardTag> boardTagList,
+    public Board(Long id, Account account, List<Itinerary> itineraryList, List<BoardTag> boardTagList,
                  String title, String preface, File thumbnail) {
+        this.id = id;
         this.account = account;
         this.itineraryList = itineraryList;
         this.boardTagList = boardTagList;
