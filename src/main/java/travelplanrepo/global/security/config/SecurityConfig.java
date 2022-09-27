@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import travelplanrepo.domain.account.repository.AccountRepository;
 import travelplanrepo.global.security.filter.JwtAuthorizationFilter;
 import travelplanrepo.global.security.utill.JwtProcessor;
 
@@ -22,7 +22,6 @@ import travelplanrepo.global.security.utill.JwtProcessor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final AccountRepository accountRepository;
     private final JwtProcessor jwtProcessor;
     private final AuthenticationConfiguration authenticationConfiguration;
 
@@ -39,12 +38,13 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
-                .addFilter(new JwtAuthorizationFilter(authenticationManager, accountRepository, jwtProcessor));
+                .addFilter(new JwtAuthorizationFilter(authenticationManager, jwtProcessor));
 
         http
                 .authorizeRequests()
-                .mvcMatchers("/board").authenticated()
-                .anyRequest().permitAll();
+                .mvcMatchers(HttpMethod.POST, "/myLogin").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/account").permitAll()
+                .anyRequest().authenticated();
 
 
         return http.build();
