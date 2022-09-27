@@ -1,0 +1,82 @@
+= TravelPlan
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Hong Seung Jae <tmd5972@gmail.com>
+
+v1.0.0, 2022.09.27
+
+// (4)
+***
+== AccountController
+=== 회원 등록
+.curl-request
+
+.http-request
+
+.request-fields
+
+.http-response
+
+.response-fields
+
+=== 회원 정보 수정
+.curl-request
+
+.http-request
+
+.request-fields
+
+.http-response
+
+.response-fields
+
+=== 회원 정보 조회
+.curl-request
+
+.http-request
+
+.request-fields
+
+.http-response
+
+.response-fields
+
+=== 회원 탈퇴
+.curl-request
+
+.http-request
+
+.request-fields
+
+.http-response
+
+.response-fields
+
+== BoardController
+=== 게시물 등록
+
+=== 게시물 수정
+
+=== 게시물 삭제
+
+=== 게시물 조회
+
+== LikesController
+=== 좋아요 생성
+
+=== 좋아요 삭제
+
+== CommentController
+=== 댓글 생성
+
+=== 댓글 수정
+
+=== 댓글 삭제
+
+=== 게시물 댓글 조회
+
+=== 특정 회원 댓글 조회
