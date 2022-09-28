@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import travelplanrepo.global.security.filter.JwtAuthenticationFilter;
 import travelplanrepo.global.security.filter.JwtAuthorizationFilter;
 import travelplanrepo.global.security.utill.JwtProcessor;
 
@@ -38,7 +39,8 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
-                .addFilter(new JwtAuthorizationFilter(authenticationManager, jwtProcessor));
+                .addFilter(new JwtAuthorizationFilter(authenticationManager, jwtProcessor))
+                .addFilter(new JwtAuthenticationFilter(authenticationManager, jwtProcessor));
 
         http
                 .authorizeRequests()
