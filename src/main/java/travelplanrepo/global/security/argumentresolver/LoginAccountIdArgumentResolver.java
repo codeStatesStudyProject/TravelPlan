@@ -6,7 +6,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import travelplanrepo.global.security.authentication.UserAccount;
+import travelplanrepo.global.security.authentication.Principal;
 
 public class LoginAccountIdArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -21,7 +21,7 @@ public class LoginAccountIdArgumentResolver implements HandlerMethodArgumentReso
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -29,8 +29,8 @@ public class LoginAccountIdArgumentResolver implements HandlerMethodArgumentReso
             return -1L;
         }
 
-        UserAccount userAccount = (UserAccount) principal;
+        Principal castedPrincipal = (Principal) principal;
 
-        return userAccount.getAccount().getId();
+        return castedPrincipal.getId();
     }
 }

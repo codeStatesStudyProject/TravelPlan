@@ -3,16 +3,18 @@ package travelplanrepo.domain.account.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import travelplanrepo.global.common.auditing.BaseTime;
 import travelplanrepo.domain.File.domain.File;
+import travelplanrepo.global.common.auditing.BaseTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Account extends BaseTime {
+
     @Id @GeneratedValue
     @Column(name = "account_id")
     private Long id;
@@ -28,11 +30,12 @@ public class Account extends BaseTime {
     private String mobile;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @ElementCollection
+    private List<Role> roleList;
 
-    public Account(String email, String password, Role role) {
+    public Account(String email, String password, List<Role> roleList) {
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.roleList = roleList;
     }
 }

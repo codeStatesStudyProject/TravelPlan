@@ -2,11 +2,12 @@ package travelplanrepo.global.security.authentication;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import travelplanrepo.domain.account.entity.Account;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Getter
 public class UserAccount implements UserDetails {
@@ -19,11 +20,10 @@ public class UserAccount implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        String roleName = account.getRole().getRoleName();
-        authorities.add(() -> roleName);
-        return authorities;
+        return account.getRoleList().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList());
     }
 
     @Override
