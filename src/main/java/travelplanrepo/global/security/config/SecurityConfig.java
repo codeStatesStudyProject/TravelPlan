@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import travelplanrepo.global.security.filter.AccountAccessDeniedHandler;
+import travelplanrepo.global.security.filter.AccountAuthenticationEntryPoint;
 import travelplanrepo.global.security.filter.JwtAuthenticationFilter;
 import travelplanrepo.global.security.filter.JwtAuthorizationFilter;
 import travelplanrepo.global.security.utill.JwtProcessor;
@@ -47,6 +49,11 @@ public class SecurityConfig {
                 .mvcMatchers(HttpMethod.POST, "/myLogin").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/account").permitAll()
                 .anyRequest().authenticated();
+
+        http
+                .exceptionHandling()
+                .accessDeniedHandler(new AccountAccessDeniedHandler())
+                .authenticationEntryPoint(new AccountAuthenticationEntryPoint());
 
 
         return http.build();
