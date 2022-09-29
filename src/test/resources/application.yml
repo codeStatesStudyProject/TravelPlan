@@ -13,3 +13,22 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+iam:
+  access-key: ${S3_ACCESS_KEY}
+  secret-key: ${S3_SECRET_KEY}
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+file:
+  profileImg: ProfileImg/
+  boardImg: BoardImg/
+  itineraryImg: ItineraryImg/
+
+env: server
+logTracer: false

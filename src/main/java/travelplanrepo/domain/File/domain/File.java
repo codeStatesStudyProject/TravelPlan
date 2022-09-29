@@ -12,13 +12,10 @@ import javax.persistence.Embeddable;
 public class File {
     private String fileName;
 
-    private String storeName;
-
     private String fullPath;
 
-    public File(String fileName, String storeName, String fullPath) {
+    public File(String fileName, String fullPath) {
         this.fileName = fileName;
-        this.storeName = storeName;
         this.fullPath = fullPath;
     }
 }
