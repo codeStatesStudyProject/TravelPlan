@@ -12,6 +12,7 @@ import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.service.AccountService;
 import travelplanrepo.domain.File.domain.File;
 import travelplanrepo.domain.File.service.FileService;
+import travelplanrepo.global.security.argumentresolver.LoginAccountId;
 import travelplanrepo.global.security.authentication.Principal;
 import travelplanrepo.global.security.authentication.UserAccount;
 
@@ -35,20 +36,25 @@ public class AccountController {
 
         return "success account created";
     }
+    @GetMapping("/account/profile/{accountId}")
+    public ResponseEntity<AccountRes> getAccount(@PathVariable long accountId) {
+        Account account = accountService.getAccount(accountId);
+        AccountRes accountRes = new AccountRes(account);
+
+        return new ResponseEntity<>(accountRes, HttpStatus.OK);
+    }
 
     @GetMapping("/account/profile")
-    public ResponseEntity<AccountRes> getAccount() {
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Account account = accountService.getAccount(principal.getId());
+    public ResponseEntity<AccountRes> getMyPage(@LoginAccountId long accountId) {
+        Account account = accountService.getAccount(accountId);
         AccountRes accountRes = new AccountRes(account);
 
         return new ResponseEntity<>(accountRes, HttpStatus.OK);
     }
 
     @DeleteMapping("/account/profile")
-    public String deleteAccount() {
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        accountService.deleteAccount(principal.getId());
+    public String deleteAccount(@LoginAccountId long accountId) {
+        accountService.deleteAccount(accountId);
 
         return "success account deleted";
     }
