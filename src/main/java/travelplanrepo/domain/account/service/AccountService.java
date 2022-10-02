@@ -33,6 +33,11 @@ public class AccountService {
         return findVerifiedAccount(accountId);
     }
 
+    public void deleteAccount(long accountId) {
+        Account account = findVerifiedAccount(accountId);
+        accountRepository.delete(account);
+    }
+
     public Account findVerifiedAccount(long accountId) {
         Optional<Account> optionalMember =
                 accountRepository.findById(accountId);
