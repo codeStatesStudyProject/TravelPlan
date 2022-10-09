@@ -42,9 +42,11 @@ public class AccountController {
                                                    @ModelAttribute PatchAccountDto patchAccountDto) throws IOException {
         patchAccountDto.setId(accountId);
 
-        Account account = accountService.updateAccount(patchAccountDto.toAccount());
         File profileImg = fileService.storeFile(patchAccountDto.getImg(), profileImgPath);
-        account.setImg(profileImg);
+        Account accountImg = patchAccountDto.toAccount();
+        accountImg.setImg(profileImg);
+
+        Account account = accountService.updateAccount(accountImg);
         AccountRes accountRes = new AccountRes(account);
 
         return new ResponseEntity<>(accountRes, HttpStatus.OK);

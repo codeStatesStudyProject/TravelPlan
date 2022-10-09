@@ -41,8 +41,6 @@ public class AccountService {
                 .ifPresent(password -> findAccount.setPassword(bCryptPasswordEncoder.encode(account.getPassword())));
         Optional.ofNullable(account.getNickName())
                 .ifPresent(name -> findAccount.setNickName(name));
-        Optional.ofNullable(account.getImg())
-                .ifPresent(img -> findAccount.setImg(img));
         Optional.ofNullable(account.getGender())
                 .ifPresent(gender -> findAccount.setGender(gender));
         Optional.ofNullable(account.getAge())
