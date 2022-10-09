@@ -18,5 +18,5 @@ file:
   boardImg: \C:\Users\Hong\IdeaProjects\Codestates\study\TravelPlanRepo\img\profileImg\
   itineraryImg: \C:\Users\Hong\IdeaProjects\Codestates\study\TravelPlanRepo\img\profileImg\
 
-env: server
+env: local
 logTracer: true

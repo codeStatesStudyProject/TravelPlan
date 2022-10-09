@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import travelplanrepo.domain.account.dto.AccountRes;
+import travelplanrepo.domain.account.dto.PatchAccountDto;
 import travelplanrepo.domain.account.dto.PostAccountDto;
 import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.service.AccountService;
@@ -36,6 +37,19 @@ public class AccountController {
 
         return "success account created";
     }
+    @PatchMapping("/account/profile")
+    public ResponseEntity<AccountRes> patchAccount(@LoginAccountId Long accountId,
+                                                   @ModelAttribute PatchAccountDto patchAccountDto) throws IOException {
+        patchAccountDto.setId(accountId);
+
+        Account account = accountService.updateAccount(patchAccountDto.toAccount());
+        File profileImg = fileService.storeFile(patchAccountDto.getImg(), profileImgPath);
+        account.setImg(profileImg);
+        AccountRes accountRes = new AccountRes(account);
+
+        return new ResponseEntity<>(accountRes, HttpStatus.OK);
+    }
+
     @GetMapping("/account/profile/{accountId}")
     public ResponseEntity<AccountRes> getAccount(@PathVariable long accountId) {
         Account account = accountService.getAccount(accountId);
@@ -44,7 +58,7 @@ public class AccountController {
         return new ResponseEntity<>(accountRes, HttpStatus.OK);
     }
 
-    @GetMapping("/account/profile")
+    @GetMapping("/account/MyPage")
     public ResponseEntity<AccountRes> getMyPage(@LoginAccountId long accountId) {
         Account account = accountService.getAccount(accountId);
         AccountRes accountRes = new AccountRes(account);
