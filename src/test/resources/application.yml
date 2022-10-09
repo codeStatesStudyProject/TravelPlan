@@ -13,3 +13,8 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+file:
+  profileImg: ProfileImg/
+  boardImg: BoardImg/
+  itineraryImg: ItineraryImg/
