@@ -1,16 +1,14 @@
 package travelplanrepo.domain.account.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.entity.Gender;
 
 @Data
-@AllArgsConstructor
-public class PostAccountDto {
+public class PatchAccountDto {
 
-    private String email;
+    private Long id;
     private String password;
     private String nickName;
     private MultipartFile img;
@@ -20,7 +18,7 @@ public class PostAccountDto {
 
     public Account toAccount() {
         Account account = new Account();
-        account.setEmail(email);
+        account.setId(id);
         account.setPassword(password);
         account.setNickName(nickName);
         account.setGender(gender);
