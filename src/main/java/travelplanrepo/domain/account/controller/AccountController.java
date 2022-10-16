@@ -13,10 +13,12 @@ import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.service.AccountService;
 import travelplanrepo.domain.File.domain.File;
 import travelplanrepo.domain.File.service.FileService;
+import travelplanrepo.domain.email.EmailService;
 import travelplanrepo.global.security.argumentresolver.LoginAccountId;
 import travelplanrepo.global.security.authentication.Principal;
 import travelplanrepo.global.security.authentication.UserAccount;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -26,6 +28,7 @@ public class AccountController {
     @Value("${file.profileImg}")
     private String profileImgPath;
     private final AccountService accountService;
+    private final EmailService emailService;
     private final FileService fileService;
 
     @PostMapping("/account")
@@ -53,7 +56,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/profile/{accountId}")
-    public ResponseEntity<AccountRes> getAccount(@PathVariable long accountId) {
+    public ResponseEntity<AccountRes> getAccount(@PathVariable Long accountId) {
         Account account = accountService.getAccount(accountId);
         AccountRes accountRes = new AccountRes(account);
 
@@ -61,17 +64,57 @@ public class AccountController {
     }
 
     @GetMapping("/account/MyPage")
-    public ResponseEntity<AccountRes> getMyPage(@LoginAccountId long accountId) {
+    public ResponseEntity<AccountRes> getMyPage(@LoginAccountId Long accountId) {
         Account account = accountService.getAccount(accountId);
         AccountRes accountRes = new AccountRes(account);
 
         return new ResponseEntity<>(accountRes, HttpStatus.OK);
     }
 
-    @DeleteMapping("/account/profile")
-    public String deleteAccount(@LoginAccountId long accountId) {
+    @PostMapping("/account/checkout-email")
+    public String viewConfirmEmail(@Valid @RequestParam String email,
+                                   @RequestParam String token) {
+        // 구현 필요
+        emailService.confirmEmail(email, token);
+
+        return "email verification successful";
+    }
+
+    @DeleteMapping("/account/profile/{accountId}")
+    public String deleteAccount(@PathVariable Long accountId) {
         accountService.deleteAccount(accountId);
 
         return "success account deleted";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

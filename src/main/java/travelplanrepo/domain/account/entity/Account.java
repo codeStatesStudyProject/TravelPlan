@@ -1,12 +1,14 @@
 package travelplanrepo.domain.account.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import travelplanrepo.domain.File.domain.File;
 import travelplanrepo.global.common.auditing.BaseTime;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -28,14 +30,14 @@ public class Account extends BaseTime {
 
     private Integer age;
     private String mobile;
+    private boolean emailAuth;
+    private String authToken;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
-    private List<Role> roleList;
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<Role> roleList = new ArrayList<>();
 
-    public Account(String email, String password, List<Role> roleList) {
-        this.email = email;
-        this.password = password;
-        this.roleList = roleList;
+    public void emailVerifiedSuccess() {
+        this.emailAuth = true;
     }
 }
