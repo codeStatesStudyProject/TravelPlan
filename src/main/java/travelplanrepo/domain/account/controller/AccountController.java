@@ -56,7 +56,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/profile/{accountId}")
-    public ResponseEntity<AccountRes> getAccount(@PathVariable long accountId) {
+    public ResponseEntity<AccountRes> getAccount(@PathVariable Long accountId) {
         Account account = accountService.getAccount(accountId);
         AccountRes accountRes = new AccountRes(account);
 
@@ -64,7 +64,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/MyPage")
-    public ResponseEntity<AccountRes> getMyPage(@LoginAccountId long accountId) {
+    public ResponseEntity<AccountRes> getMyPage(@LoginAccountId Long accountId) {
         Account account = accountService.getAccount(accountId);
         AccountRes accountRes = new AccountRes(account);
 
@@ -81,7 +81,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/account/profile/{accountId}")
-    public String deleteAccount(@PathVariable long accountId) {
+    public String deleteAccount(@PathVariable Long accountId) {
         accountService.deleteAccount(accountId);
 
         return "success account deleted";
