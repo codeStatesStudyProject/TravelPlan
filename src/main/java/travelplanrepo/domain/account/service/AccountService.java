@@ -8,11 +8,12 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import travelplanrepo.domain.account.entity.Account;
+import travelplanrepo.domain.account.entity.Role;
 import travelplanrepo.domain.account.repository.AccountRepository;
 import travelplanrepo.domain.email.EmailAuth;
-import travelplanrepo.domain.email.EmailAuthRepository;
 import travelplanrepo.domain.email.EmailService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,27 +25,19 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final EmailService emailService;
-    private final EmailAuthRepository emailAuthRepository;
-
     @Transactional
     public void signUp(Account account) {
 
         validateDuplicated(account.getEmail());
 
-        EmailAuth emailAuth = emailAuthRepository.save(EmailAuth.builder()
-                .email(account.getEmail())
-                .authToken(UUID.randomUUID().toString())
-                .expired(false)
-                .build());
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        account.setEmailAuth(false);
+        account.setAuthToken(UUID.randomUUID().toString());
+        account.setRoleList(List.of(Role.USER));
 
-        account = accountRepository.save(
-                Account.builder()
-                        .email(account.getEmail())
-                        .password(bCryptPasswordEncoder.encode(account.getPassword()))
-                        .emailAuth(false)
-                        .build());
+        accountRepository.save(account);
 
-        emailService.sendEmail(emailAuth.getEmail(), emailAuth.getAuthToken());
+        emailService.sendEmail(account.getEmail(), account.getAuthToken());
     }
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
@@ -73,6 +66,7 @@ public class AccountService {
 
     public void deleteAccount(long accountId) {
         Account account = findVerifiedAccount(accountId);
+
         accountRepository.delete(account);
     }
 
@@ -89,4 +83,6 @@ public class AccountService {
         if (accountRepository.findByEmail(email).isPresent())
             throw new NoSuchMessageException("중복된 이메일입니다.");
     }
+
+
 }

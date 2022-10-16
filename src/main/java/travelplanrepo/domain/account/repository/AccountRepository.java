@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import travelplanrepo.domain.account.entity.Account;
+import travelplanrepo.domain.account.entity.Role;
 
+import javax.management.relation.RoleList;
 import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {

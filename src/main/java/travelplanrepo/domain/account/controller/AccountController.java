@@ -13,6 +13,7 @@ import travelplanrepo.domain.account.entity.Account;
 import travelplanrepo.domain.account.service.AccountService;
 import travelplanrepo.domain.File.domain.File;
 import travelplanrepo.domain.File.service.FileService;
+import travelplanrepo.domain.email.EmailService;
 import travelplanrepo.global.security.argumentresolver.LoginAccountId;
 import travelplanrepo.global.security.authentication.Principal;
 import travelplanrepo.global.security.authentication.UserAccount;
@@ -27,6 +28,7 @@ public class AccountController {
     @Value("${file.profileImg}")
     private String profileImgPath;
     private final AccountService accountService;
+    private final EmailService emailService;
     private final FileService fileService;
 
     @PostMapping("/account")
@@ -69,18 +71,50 @@ public class AccountController {
         return new ResponseEntity<>(accountRes, HttpStatus.OK);
     }
 
-    @GetMapping("/account/checkout-email")
-    public String viewConfirmEmail(@Valid@RequestParam String token) {
+    @PostMapping("/account/checkout-email")
+    public String viewConfirmEmail(@Valid @RequestParam String email,
+                                   @RequestParam String token) {
         // 구현 필요
-//        accountService.confirmEmail(token);
+        emailService.confirmEmail(email, token);
 
-        return "redirect:/login";
+        return "email verification successful";
     }
 
-    @DeleteMapping("/account/profile")
-    public String deleteAccount(@LoginAccountId long accountId) {
+    @DeleteMapping("/account/profile/{accountId}")
+    public String deleteAccount(@PathVariable long accountId) {
         accountService.deleteAccount(accountId);
 
         return "success account deleted";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
