@@ -8,11 +8,13 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import travelplanrepo.domain.account.entity.Account;
-import travelplanrepo.domain.account.entity.Role;
 import travelplanrepo.domain.account.repository.AccountRepository;
+import travelplanrepo.domain.email.EmailAuth;
+import travelplanrepo.domain.email.EmailAuthRepository;
+import travelplanrepo.domain.email.EmailService;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,14 +23,28 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final EmailService emailService;
+    private final EmailAuthRepository emailAuthRepository;
 
     @Transactional
-    public Account signUp(Account account) {
+    public void signUp(Account account) {
 
-        String encodePassword = bCryptPasswordEncoder.encode(account.getPassword());
-        account.setPassword(encodePassword);
-        account.setRoleList(List.of(Role.USER));
-        return accountRepository.save(account);
+        validateDuplicated(account.getEmail());
+
+        EmailAuth emailAuth = emailAuthRepository.save(EmailAuth.builder()
+                .email(account.getEmail())
+                .authToken(UUID.randomUUID().toString())
+                .expired(false)
+                .build());
+
+        account = accountRepository.save(
+                Account.builder()
+                        .email(account.getEmail())
+                        .password(bCryptPasswordEncoder.encode(account.getPassword()))
+                        .emailAuth(false)
+                        .build());
+
+        emailService.sendEmail(emailAuth.getEmail(), emailAuth.getAuthToken());
     }
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
@@ -67,5 +83,10 @@ public class AccountService {
                 optionalMember.orElseThrow(() ->
                         new NoSuchMessageException("회원을 찾을 수 없습니다."));
         return findAccount;
+    }
+
+    public void validateDuplicated(String email) {
+        if (accountRepository.findByEmail(email).isPresent())
+            throw new NoSuchMessageException("중복된 이메일입니다.");
     }
 }

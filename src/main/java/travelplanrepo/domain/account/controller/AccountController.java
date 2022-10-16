@@ -17,6 +17,7 @@ import travelplanrepo.global.security.argumentresolver.LoginAccountId;
 import travelplanrepo.global.security.authentication.Principal;
 import travelplanrepo.global.security.authentication.UserAccount;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -66,6 +67,14 @@ public class AccountController {
         AccountRes accountRes = new AccountRes(account);
 
         return new ResponseEntity<>(accountRes, HttpStatus.OK);
+    }
+
+    @GetMapping("/account/checkout-email")
+    public String viewConfirmEmail(@Valid@RequestParam String token) {
+        // 구현 필요
+//        accountService.confirmEmail(token);
+
+        return "redirect:/login";
     }
 
     @DeleteMapping("/account/profile")
