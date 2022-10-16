@@ -35,20 +35,7 @@ public class Account extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.LAZY)
-//    @CollectionTable(
-//            name = "roleList",
-//            joinColumns = @JoinColumn(name = "account_id")
-//    )
     private List<Role> roleList = new ArrayList<>();
-
-
-//    public Account(String email, String password, List<Role> roleList, Boolean emailAuth, String authToken) {
-//        this.email = email;
-//        this.password = password;
-//        this.roleList = roleList;
-//        this.emailAuth = emailAuth;
-//        this.authToken = authToken;
-//    }
 
     public void emailVerifiedSuccess() {
         this.emailAuth = true;
